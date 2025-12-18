@@ -52,11 +52,14 @@
 <script>
     const API_URL = "https://cors.kawiesh.top/https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions";
 
+    let globalElements = [];
+
     async function fetchEverything() {
         try {
             const response = await fetch(API_URL);
             const raw = await response.json();
             const elements = raw.data.Catalog.searchStore.elements;
+            globalElements = elements;
             
             const grid = document.getElementById('game-grid');
             grid.innerHTML = ''; 
@@ -115,18 +118,27 @@
 
                     <div class="footer-btns">
                         <a href="${storeUrl}" target="_blank" class="btn btn-blue" ${!slug ? 'style="pointer-events:none;opacity:0.5"' : ''}>View Store</a>
-                        <button class="btn btn-outline" onclick="window.logGameData(${index})">Log JSON</button>
+                        <button class="btn btn-outline" class="log-btn" data-idx="${index}">Log JSON</button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
 
-            // FIX 4: Create global function to log game data
-            window.logGameData = function(index) {
-                const item = elements[index];
-                console.log(`--- DATA FOR: ${item.title} ---`);
-                console.log(item);
-            };
+            // FIX 4: Add event listeners to all log buttons
+            document.querySelectorAll('.log-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const idx = parseInt(this.getAttribute('data-idx'));
+                    const item = globalElements[idx];
+                    console.clear();
+                    console.log('='.repeat(50));
+                    console.log(`DATA FOR: ${item.title}`);
+                    console.log('='.repeat(50));
+                    console.log(item);
+                    console.log('='.repeat(50));
+                });
+            });
             });
 
         } catch (error) {
