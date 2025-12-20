@@ -100,7 +100,7 @@
 
   <script>
     const PROXY = "https://cors.kawiesh.top/";
-    const API_URL = PROXY + "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=US&allowCountries=US";
+    const API_URL = PROXY + "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-IN&country=IN&allowCountries=IN";
     const CDN_BASE = "https://cdn1.epicgames.com/";
 
     async function loadFreeGames() {
@@ -124,7 +124,7 @@
           const title = el.title;
           const description = el.description || "No description available.";
           const productSlug = el.productSlug || el.urlSlug || "";
-          const offerUrl = productSlug ? "https://store.epicgames.com/en-US/p/" + productSlug : "https://store.epicgames.com/en-US/free-games";
+          const offerUrl = productSlug ? "https://store.epicgames.com/en-IN/p/" + productSlug : "https://store.epicgames.com/en-IN/free-games";
           
           // --- IMAGE LOGIC WITH DOUBLE PROXY PROTECTION ---
           const keyImages = el.keyImages || [];
@@ -181,7 +181,7 @@
                   <span class="timer-text">...</span>
                 </div>
                 <div class="date-range">
-                  ${isCurrent ? 'Ends: ' : 'Starts: '} ${game[isCurrent ? 'endDate' : 'startDate'].toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute:'2-digit' })}
+                  ${isCurrent ? 'Ends: ' : 'Starts: '} ${game[isCurrent ? 'endDate' : 'startDate'].toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: 'numeric', minute:'2-digit' })}
                 </div>
               </div>
               <a href="${game.url}" target="_blank" class="btn-action">
